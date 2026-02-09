@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <defs>
+    <style>
+      .table-header { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: white; }
+      .table-field { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+      .pk { fill: #f59e0b; }
+      .fk { fill: #3b82f6; }
+      .relation-line { stroke: #666; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+  
+  <!-- USER Table -->
+  <g transform="translate(50, 50)">
+    <rect width="180" height="220" rx="8" fill="white" stroke="#8b5cf6" stroke-width="2"/>
+    <rect width="180" height="35" rx="8" fill="#8b5cf6"/>
+    <text x="90" y="24" text-anchor="middle" class="table-header">USER</text>
+    <text x="15" y="55" class="table-field"><tspan class="pk">🔑</tspan> id (UUID)</text>
+    <text x="15" y="75" class="table-field">name (String)</text>
+    <text x="15" y="95" class="table-field">email (String) UK</text>
+    <text x="15" y="115" class="table-field">password (String?)</text>
+    <text x="15" y="135" class="table-field">role (Enum)</text>
+    <text x="15" y="155" class="table-field">img (String?)</text>
+    <text x="15" y="175" class="table-field">rating (Float)</text>
+    <text x="15" y="195" class="table-field">createdAt, updatedAt</text>
+  </g>
+
+  <!-- CAR Table -->
+  <g transform="translate(50, 320)">
+    <rect width="180" height="240" rx="8" fill="white" stroke="#3b82f6" stroke-width="2"/>
+    <rect width="180" height="35" rx="8" fill="#3b82f6"/>
+    <text x="90" y="24" text-anchor="middle" class="table-header">CAR</text>
+    <text x="15" y="55" class="table-field"><tspan class="pk">🔑</tspan> id (UUID)</text>
+    <text x="15" y="75" class="table-field">name (String)</text>
+    <text x="15" y="95" class="table-field">brand (String)</text>
+    <text x="15" y="115" class="table-field">model (String)</text>
+    <text x="15" y="135" class="table-field">image (String)</text>
+    <text x="15" y="155" class="table-field">rating (Float)</text>
+    <text x="15" y="175" class="table-field">fuelType (Enum)</text>
+    <text x="15" y="195" class="table-field">passengerCapacity (Int)</text>
+    <text x="15" y="215" class="table-field">color, condition</text>
+  </g>
+
+  <!-- RENT Table -->
+  <g transform="translate(360, 150)">
+    <rect width="180" height="200" rx="8" fill="white" stroke="#10b981" stroke-width="2"/>
+    <rect width="180" height="35" rx="8" fill="#10b981"/>
+    <text x="90" y="24" text-anchor="middle" class="table-header">RENT</text>
+    <text x="15" y="55" class="table-field"><tspan class="pk">🔑</tspan> id (UUID)</text>
+    <text x="15" y="75" class="table-field"><tspan class="fk">🔗</tspan> userId (FK → User)</text>
+    <text x="15" y="95" class="table-field"><tspan class="fk">🔗</tspan> carId (FK → Car)</text>
+    <text x="15" y="115" class="table-field">rentStatus (Enum)</text>
+    <text x="15" y="135" class="table-field">startingPoint (String)</text>
+    <text x="15" y="155" class="table-field">destination (String)</text>
+    <text x="15" y="175" class="table-field">createdAt, updatedAt</text>
+  </g>
+
+  <!-- BID Table -->
+  <g transform="translate(670, 150)">
+    <rect width="180" height="200" rx="8" fill="white" stroke="#f97316" stroke-width="2"/>
+    <rect width="180" height="35" rx="8" fill="#f97316"/>
+    <text x="90" y="24" text-anchor="middle" class="table-header">BID</text>
+    <text x="15" y="55" class="table-field"><tspan class="pk">🔑</tspan> id (UUID)</text>
+    <text x="15" y="75" class="table-field"><tspan class="fk">🔗</tspan> rentId (FK → Rent)</text>
+    <text x="15" y="95" class="table-field"><tspan class="fk">🔗</tspan> driverId (FK → User)</text>
+    <text x="15" y="115" class="table-field">bidAmount (Float)</text>
+    <text x="15" y="135" class="table-field">bidStatus (Enum)</text>
+    <text x="15" y="155" class="table-field">driverLocation (String)</text>
+    <text x="15" y="175" class="table-field">createdAt, updatedAt</text>
+  </g>
+
+  <!-- Relationship Lines -->
+  <!-- User to Rent (1:N) -->
+  <path d="M 230 160 L 280 160 L 280 230 L 360 230" class="relation-line"/>
+  <circle cx="230" cy="160" r="5" fill="#8b5cf6"/>
+  <text x="370" y="225" font-size="16">◄</text>
+  
+  <!-- Car to Rent (1:N) -->
+  <path d="M 230 400 L 280 400 L 280 290 L 360 290" class="relation-line"/>
+  <circle cx="230" cy="400" r="5" fill="#3b82f6"/>
+  <text x="370" y="285" font-size="16">◄</text>
+  
+  <!-- Rent to Bid (1:N) -->
+  <path d="M 540 250 L 670 250" class="relation-line"/>
+  <circle cx="540" cy="250" r="5" fill="#10b981"/>
+  <text x="680" y="245" font-size="16">◄</text>
+  
+  <!-- User to Bid (1:N as driver) -->
+  <path d="M 230 100 L 760 100 L 760 150" class="relation-line"/>
+  <circle cx="230" cy="100" r="5" fill="#8b5cf6"/>
+  <text x="755" y="160" font-size="16">▼</text>
+
+  <!-- Legend -->
+  <g transform="translate(600, 480)">
+    <rect width="250" height="100" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="125" y="25" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#333">Legend</text>
+    <text x="20" y="50" font-family="Arial" font-size="11" fill="#333">🔑 Primary Key (PK)</text>
+    <text x="20" y="70" font-family="Arial" font-size="11" fill="#333">🔗 Foreign Key (FK)</text>
+    <text x="20" y="90" font-family="Arial" font-size="11" fill="#333">● ─── ◄ One-to-Many Relationship</text>
+  </g>
+</svg>
