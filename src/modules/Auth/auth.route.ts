@@ -16,6 +16,7 @@ router.post(
   validateRequest(AuthValidation.refreshTokenValidationSchema),
   AuthControllers.refreshToken,
 );
+
 router.post(
   '/register',
   validateRequest(AuthValidation.registerUserValidationSchema),

@@ -2,17 +2,16 @@
 	"info": {
 		"_postman_id": "a8352301-0533-42c3-88bd-07325ca9ba04",
 		"name": "apollo gears",
-		"description": "Updated for Prisma + PostgreSQL. IDs are now UUIDs instead of MongoDB ObjectIds.",
+		"description": "Updated for Prisma + PostgreSQL. Organized by Resource (Auth, Users, Cars, Rents, Bids).",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28346560",
-		"_collection_link": "https://cloudy-spaceship-160654.postman.co/workspace/Team-Workspace~bc4d3685-422d-409f-8beb-c299230f93b9/collection/28346560-a8352301-0533-42c3-88bd-07325ca9ba04?action=share&source=collection_link&creator=28346560"
+		"_exporter_id": "28346560"
 	},
 	"item": [
 		{
-			"name": "auth",
+			"name": "Auth",
 			"item": [
 				{
-					"name": "login",
+					"name": "Login",
 					"event": [
 						{
 							"listen": "test",
@@ -35,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"123456\"\r\n}\r\n",
+							"raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -56,7 +55,7 @@
 					"response": []
 				},
 				{
-					"name": "register user",
+					"name": "Register User",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -85,10 +84,10 @@
 			]
 		},
 		{
-			"name": "admin",
+			"name": "Users",
 			"item": [
 				{
-					"name": "create admin",
+					"name": "Create Admin",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -120,7 +119,7 @@
 					"response": []
 				},
 				{
-					"name": "create driver",
+					"name": "Create Driver",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -152,9 +151,9 @@
 					"response": []
 				},
 				{
-					"name": "create a car",
+					"name": "Get All Users",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
@@ -162,67 +161,51 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Mercedes-Benz E-Class\",\r\n  \"brand\": \"Mercedes-Benz\",\r\n  \"model\": \"E-Class-2023\",\r\n  \"image\": \"https://stimg2.cardekho.com/images/roadTestimages/userimages/722/1620195837912/GeneralRoadTest.jpg?tr=w-360?tr=w-320\",\r\n  \"rating\": 4.9,\r\n  \"fuelType\": \"Diesel\",\r\n  \"passengerCapacity\": 5,\r\n  \"color\": \"Gray\",\r\n  \"condition\": \"New\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{apollogears}}/cars",
+							"raw": "{{apollogears}}/users",
 							"host": [
 								"{{apollogears}}"
 							],
 							"path": [
-								"cars"
+								"users"
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "create a car",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{access_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Toyota Corolla\",\r\n  \"brand\": \"Toyota\",\r\n  \"model\": \"Corolla-2023\",\r\n  \"image\": \"https://imageonthefly.autodatadirect.com/images/?width=1200&height=900&IMG=USD30TOS251B01300.jpg\",\r\n  \"rating\": 4.5,\r\n  \"fuelType\": \"Petrol\",\r\n  \"passengerCapacity\": 5,\r\n  \"color\": \"Silver\",\r\n  \"condition\": \"New\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{apollogears}}/cars",
-									"host": [
-										"{{apollogears}}"
-									],
-									"path": [
-										"cars"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"message\": \"Car is created successfully\",\n    \"data\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Toyota Corolla\",\n        \"brand\": \"Toyota\",\n        \"model\": \"Corolla-2023\",\n        \"image\": \"https://imageonthefly.autodatadirect.com/images/?width=1200&height=900&IMG=USD30TOS251B01300.jpg\",\n        \"rating\": 4.5,\n        \"fuelType\": \"Petrol\",\n        \"passengerCapacity\": 5,\n        \"color\": \"Silver\",\n        \"condition\": \"New\",\n        \"createdAt\": \"2024-05-13T18:35:44.000Z\",\n        \"updatedAt\": \"2024-05-13T18:35:44.000Z\"\n    }\n}"
-						}
-					]
+					"response": []
 				},
 				{
-					"name": "update user role",
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apollogears}}/users/:id",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{user_id}}",
+									"description": "UUID of the user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Role",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -262,30 +245,7 @@
 					"response": []
 				},
 				{
-					"name": "get all users",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{apollogears}}/users",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete user",
+					"name": "Delete User",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -314,9 +274,128 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "Create Car",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mercedes-Benz E-Class\",\r\n  \"brand\": \"Mercedes-Benz\",\r\n  \"model\": \"E-Class-2023\",\r\n  \"image\": \"https://stimg2.cardekho.com/images/roadTestimages/userimages/722/1620195837912/GeneralRoadTest.jpg?tr=w-360?tr=w-320\",\r\n  \"rating\": 4.9,\r\n  \"fuelType\": \"Diesel\",\r\n  \"passengerCapacity\": 5,\r\n  \"color\": \"Gray\",\r\n  \"condition\": \"New\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apollogears}}/cars",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
 				},
 				{
-					"name": "update car",
+					"name": "Get All Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apollogears}}/cars",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Car By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apollogears}}/cars/:id",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"cars",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{car_id}}",
+									"description": "UUID of the car"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apollogears}}/cars?searchTerm=Toyota&page=1&limit=10&sortBy=rating&sortOrder=desc",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"cars"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "Toyota",
+									"description": "Search in name, brand, model"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "rating"
+								},
+								{
+									"key": "sortOrder",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Car",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -356,7 +435,7 @@
 					"response": []
 				},
 				{
-					"name": "delete car",
+					"name": "Delete Car",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -389,10 +468,10 @@
 			]
 		},
 		{
-			"name": "user",
+			"name": "Rents",
 			"item": [
 				{
-					"name": "rent a car",
+					"name": "Rent Car",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -421,48 +500,10 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "rent a car",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{access_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"userId\": \"{{user_id}}\",\r\n  \"carId\": \"{{car_id}}\",\r\n  \"startingPoint\": \"123 Main Street\",\r\n  \"destination\": \"456 Elm Street\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{apollogears}}/rents",
-									"host": [
-										"{{apollogears}}"
-									],
-									"path": [
-										"rents"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"message\": \"Rent is created successfully\",\n    \"data\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n        \"userId\": \"550e8400-e29b-41d4-a716-446655440002\",\n        \"carId\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"rentStatus\": \"pending\",\n        \"startingPoint\": \"123 Main Street\",\n        \"destination\": \"456 Elm Street\",\n        \"createdAt\": \"2024-05-13T18:48:54.000Z\",\n        \"updatedAt\": \"2024-05-13T18:48:54.000Z\",\n        \"user\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440002\",\n            \"name\": \"John Doe\",\n            \"email\": \"user@gmail.com\"\n        },\n        \"car\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"name\": \"Toyota Corolla\",\n            \"brand\": \"Toyota\"\n        }\n    }\n}"
-						}
-					]
+					"response": []
 				},
 				{
-					"name": "get user rents",
+					"name": "Get User Rents",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -493,49 +534,39 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "get user rents",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{access_token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{apollogears}}/rents?userId={{user_id}}&rentStatus=pending",
-									"host": [
-										"{{apollogears}}"
-									],
-									"path": [
-										"rents"
-									],
-									"query": [
-										{
-											"key": "userId",
-											"value": "{{user_id}}"
-										},
-										{
-											"key": "rentStatus",
-											"value": "pending"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"message\": \"Rents are retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n            \"userId\": \"550e8400-e29b-41d4-a716-446655440002\",\n            \"carId\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"rentStatus\": \"pending\",\n            \"startingPoint\": \"123 Main Street\",\n            \"destination\": \"456 Elm Street\",\n            \"user\": {\n                \"id\": \"550e8400-e29b-41d4-a716-446655440002\",\n                \"name\": \"John Doe\",\n                \"email\": \"user@gmail.com\"\n            },\n            \"car\": {\n                \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n                \"name\": \"Toyota Corolla\",\n                \"brand\": \"Toyota\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 1,\n        \"totalPage\": 1\n    }\n}"
-						}
-					]
+					"response": []
 				},
 				{
-					"name": "get rent by id",
+					"name": "Get Pending Rents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apollogears}}/rents?rentStatus=pending",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"rents"
+							],
+							"query": [
+								{
+									"key": "rentStatus",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rent By ID",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -566,112 +597,7 @@
 					"response": []
 				},
 				{
-					"name": "get rent bids",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{apollogears}}/bids?rentId={{rent_id}}",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"bids"
-							],
-							"query": [
-								{
-									"key": "rentId",
-									"value": "{{rent_id}}",
-									"description": "UUID of the rent"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "get rent bids",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{access_token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{apollogears}}/bids?rentId={{rent_id}}",
-									"host": [
-										"{{apollogears}}"
-									],
-									"path": [
-										"bids"
-									],
-									"query": [
-										{
-											"key": "rentId",
-											"value": "{{rent_id}}"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"message\": \"Bids are retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440003\",\n            \"rentId\": \"550e8400-e29b-41d4-a716-446655440001\",\n            \"driverId\": \"550e8400-e29b-41d4-a716-446655440004\",\n            \"bidAmount\": 100,\n            \"driverLocation\": \"789 Oak Street\",\n            \"bidStatus\": \"pending\",\n            \"createdAt\": \"2024-05-13T19:00:00.000Z\",\n            \"updatedAt\": \"2024-05-13T19:00:00.000Z\",\n            \"rent\": {\n                \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n                \"startingPoint\": \"123 Main Street\",\n                \"destination\": \"456 Elm Street\"\n            },\n            \"driver\": {\n                \"id\": \"550e8400-e29b-41d4-a716-446655440004\",\n                \"name\": \"Driver Name\",\n                \"email\": \"driver@gmail.com\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 1,\n        \"totalPage\": 1\n    }\n}"
-						}
-					]
-				},
-				{
-					"name": "accept bid",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"bidStatus\": \"accepted\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{apollogears}}/bids/:id",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"bids",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{bid_id}}",
-									"description": "UUID of the bid to accept"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update rent status",
+					"name": "Update Rent Status",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -713,10 +639,10 @@
 			]
 		},
 		{
-			"name": "driver",
+			"name": "Bids",
 			"item": [
 				{
-					"name": "bid a rent",
+					"name": "Create Bid",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -745,48 +671,40 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "bid a rent",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{access_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"rentId\": \"{{rent_id}}\",\r\n  \"driverId\": \"{{driver_id}}\",\r\n  \"bidAmount\": 200,\r\n  \"driverLocation\": \"789 Oak Street\"\r\n}\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{apollogears}}/bids",
-									"host": [
-										"{{apollogears}}"
-									],
-									"path": [
-										"bids"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"message\": \"Bid is created successfully\",\n    \"data\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440003\",\n        \"rentId\": \"550e8400-e29b-41d4-a716-446655440001\",\n        \"driverId\": \"550e8400-e29b-41d4-a716-446655440004\",\n        \"bidAmount\": 200,\n        \"driverLocation\": \"789 Oak Street\",\n        \"bidStatus\": \"pending\",\n        \"createdAt\": \"2024-05-13T19:00:00.000Z\",\n        \"updatedAt\": \"2024-05-13T19:00:00.000Z\",\n        \"rent\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440001\"\n        },\n        \"driver\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440004\",\n            \"name\": \"Driver Name\"\n        }\n    }\n}"
-						}
-					]
+					"response": []
 				},
 				{
-					"name": "get driver bids",
+					"name": "Get Rent Bids",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apollogears}}/bids?rentId={{rent_id}}",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"bids"
+							],
+							"query": [
+								{
+									"key": "rentId",
+									"value": "{{rent_id}}",
+									"description": "UUID of the rent"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Driver Bids",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -816,36 +734,7 @@
 					"response": []
 				},
 				{
-					"name": "get all pending rents",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{apollogears}}/rents?rentStatus=pending",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"rents"
-							],
-							"query": [
-								{
-									"key": "rentStatus",
-									"value": "pending"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update bid",
+					"name": "Update Bid (Edit)",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -885,7 +774,47 @@
 					"response": []
 				},
 				{
-					"name": "delete bid",
+					"name": "Accept Bid",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bidStatus\": \"accepted\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apollogears}}/bids/:id",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"bids",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bid_id}}",
+									"description": "UUID of the bid to accept"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Bid",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -909,124 +838,6 @@
 									"key": "id",
 									"value": "{{bid_id}}",
 									"description": "UUID of the bid to delete"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "public",
-			"item": [
-				{
-					"name": "get all cars",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{apollogears}}/cars",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"cars"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get car by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{apollogears}}/cars/:id",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"cars",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{car_id}}",
-									"description": "UUID of the car"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "search cars",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{apollogears}}/cars?searchTerm=Toyota&page=1&limit=10&sortBy=rating&sortOrder=desc",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"cars"
-							],
-							"query": [
-								{
-									"key": "searchTerm",
-									"value": "Toyota",
-									"description": "Search in name, brand, model"
-								},
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "limit",
-									"value": "10"
-								},
-								{
-									"key": "sortBy",
-									"value": "rating"
-								},
-								{
-									"key": "sortOrder",
-									"value": "desc"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get user by id",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{apollogears}}/users/:id",
-							"host": [
-								"{{apollogears}}"
-							],
-							"path": [
-								"users",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{user_id}}",
-									"description": "UUID of the user"
 								}
 							]
 						}

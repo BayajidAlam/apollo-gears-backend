@@ -2,10 +2,8 @@ import { z } from 'zod';
 
 const loginValidationSchema = z.object({
   body: z.object({
-    name: z.string().optional(),
-    img: z.string().optional(),
-    email: z.string({ required_error: 'Id is required.' }),
-    password: z.string().optional(),
+    email: z.string({ required_error: 'Email is required.' }).email(),
+    password: z.string({ required_error: 'Password is required.' }),
   }),
 });
 
@@ -19,10 +17,10 @@ const refreshTokenValidationSchema = z.object({
 
 export const registerUserValidationSchema = z.object({
   body: z.object({
-    name: z.string(),
-    email: z.string().email(),
-    password: z.string().optional(),
-    img: z.string().optional(), // Updated to match schema
+    name: z.string({ required_error: 'Name is required.' }),
+    email: z.string({ required_error: 'Email is required.' }).email(),
+    password: z.string({ required_error: 'Password is required.' }),
+    img: z.string().optional(),
   }),
 });
 

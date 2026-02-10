@@ -21,63 +21,45 @@ const loginUser = async (payload: TLoginUser) => {
   });
 
   if (!user) {
-    const newUser = await registerUser(payload);
-
-    const jwtPayload = {
-      email: newUser.email,
-      role: newUser.role,
-    };
-
-    const accessToken = createToken(
-      jwtPayload,
-      config.jwt_access_secret as string,
-      config.jwt_access_expires_in as string,
-    );
-
-    const refreshToken = createToken(
-      jwtPayload,
-      config.jwt_refresh_secret as string,
-      config.jwt_refresh_expires_in as string,
-    );
-
-    return {
-      accessToken,
-      refreshToken,
-    };
-  } else {
-    if (payload.password && user.password) {
-      const isPasswordMatched = await bcryptJs.compare(
-        payload.password,
-        user.password,
-      );
-
-      if (!isPasswordMatched) {
-        throw new AppError(httpStatus.NOT_FOUND, 'Password Incorrect!');
-      }
-    }
-    const jwtPayload = {
-      email: user.email,
-      role: user.role,
-      id: user.id,
-    };
-
-    const accessToken = createToken(
-      jwtPayload,
-      config.jwt_access_secret as string,
-      config.jwt_access_expires_in as string,
-    );
-
-    const refreshToken = createToken(
-      jwtPayload,
-      config.jwt_refresh_secret as string,
-      config.jwt_refresh_expires_in as string,
-    );
-
-    return {
-      accessToken,
-      refreshToken,
-    };
+    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found!');
   }
+
+  // checking if the password is correct
+  if (!payload.password || !user.password) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Password is required!');
+  }
+
+  const isPasswordMatched = await bcryptJs.compare(
+    payload.password,
+    user.password,
+  );
+
+  if (!isPasswordMatched) {
+    throw new AppError(httpStatus.UNAUTHORIZED, 'Password Incorrect!');
+  }
+
+  const jwtPayload = {
+    email: user.email,
+    role: user.role,
+    id: user.id,
+  };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+
+  const refreshToken = createToken(
+    jwtPayload,
+    config.jwt_refresh_secret as string,
+    config.jwt_refresh_expires_in as string,
+  );
+
+  return {
+    accessToken,
+    refreshToken,
+  };
 };
 
 const refreshToken = async (token: string) => {
@@ -112,14 +94,11 @@ const refreshToken = async (token: string) => {
 };
 
 const registerUser = async (userData: TLoginUser) => {
-  let hashedPassword: string | undefined;
-
-  if (userData.password) {
-    hashedPassword = await bcryptJs.hash(
-      userData.password,
-      Number(config.bcrypt_salt_rounds),
-    );
-  }
+  // hashing password
+  const hashedPassword = await bcryptJs.hash(
+    userData.password as string,
+    Number(config.bcrypt_salt_rounds),
+  );
 
   const user = await prisma.user.create({
     data: {
