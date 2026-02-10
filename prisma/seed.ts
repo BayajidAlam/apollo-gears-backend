@@ -11,6 +11,7 @@ async function main() {
         where: { email: adminEmail },
     });
 
+    
     if (existingAdmin) {
         console.log('Admin already exists!');
         return;

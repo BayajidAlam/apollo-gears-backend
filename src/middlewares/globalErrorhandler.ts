@@ -64,6 +64,12 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
       },
     ];
   }
+
+
+
+
+
+
   // Generic Error
   else if (err instanceof Error) {
     message = err.message;
