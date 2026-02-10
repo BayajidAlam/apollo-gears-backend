@@ -5,12 +5,14 @@ import {
   createCarValidationSchema,
   updateCarValidationSchema,
 } from './car.validation';
+import auth from '../../middlewares/auth';
+import { USER_ROLE } from '../User/user.utils';
 
 const router = express.Router();
 
 router.post(
   '/',
-  // auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin),
   validateRequest(createCarValidationSchema),
   CarController.createCar,
 );
@@ -21,14 +23,14 @@ router.get('/:id', CarController.findCarById);
 
 router.patch(
   '/:id',
-  // auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin),
   validateRequest(updateCarValidationSchema),
   CarController.updateCarById,
 );
 
 router.delete(
   '/:id',
-  // auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin),
   CarController.deleteCarById,
 );
 

@@ -56,7 +56,7 @@
 					"response": []
 				},
 				{
-					"name": "registration",
+					"name": "register user",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -87,6 +87,70 @@
 		{
 			"name": "admin",
 			"item": [
+				{
+					"name": "create admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New Admin\",\r\n    \"email\": \"admin_new@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apollogears}}/users",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New Driver\",\r\n    \"email\": \"driver_new@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"driver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apollogears}}/users",
+							"host": [
+								"{{apollogears}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "create a car",
 					"request": {
