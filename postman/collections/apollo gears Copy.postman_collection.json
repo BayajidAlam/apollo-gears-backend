@@ -1,0 +1,1246 @@
+{
+  "info": {
+    "_postman_id": "922cd90b-f28c-4166-bd55-801d8bab55cd",
+    "name": "apollo gears Copy",
+    "description": "Updated for Prisma + PostgreSQL. Organized by Resource (Auth, Users, Cars, Rents, Bids).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.accessToken) {",
+                  "    pm.collectionVariables.set(\"access_token\", jsonData.data.accessToken);",
+                  "}",
+                  "if (jsonData.data && jsonData.data.user && jsonData.data.user.id) {",
+                  "    pm.collectionVariables.set(\"user_id\", jsonData.data.user.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "00467af6-51d1-4e62-9a9f-7266899b4efc"
+              }
+            }
+          ],
+          "id": "f5755c21-010f-4c62-be66-a57e12ea8ea0",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/auth/login",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.accessToken) {",
+                  "    pm.collectionVariables.set(\"access_token\", jsonData.data.accessToken);",
+                  "}",
+                  "if (jsonData.data && jsonData.data.user && jsonData.data.user.id) {",
+                  "    pm.collectionVariables.set(\"user_id\", jsonData.data.user.id);",
+                  "    pm.collectionVariables.set(\"admin_id\", jsonData.data.user.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "02767804-01c0-460d-afbb-e156cd0f1409"
+              }
+            }
+          ],
+          "id": "116e45da-d3f9-4ef8-8c52-34834f0e34f8",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/auth/login",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Driver",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.accessToken) {",
+                  "    pm.collectionVariables.set(\"access_token\", jsonData.data.accessToken);",
+                  "}",
+                  "if (jsonData.data && jsonData.data.user && jsonData.data.user.id) {",
+                  "    pm.collectionVariables.set(\"user_id\", jsonData.data.user.id);",
+                  "    pm.collectionVariables.set(\"driver_id\", jsonData.data.user.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "8697f2ba-cc67-495a-a707-9e87fe6554f0"
+              }
+            }
+          ],
+          "id": "c91cfabc-04a4-4670-9ee7-0b37e20da45d",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"driver_new@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/auth/login",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.id) {",
+                  "    pm.collectionVariables.set(\"user_id\", jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "47971309-5f72-4998-87cc-45562c3c07e3"
+              }
+            }
+          ],
+          "id": "b241e4bf-e484-4880-97b5-96f81cb363a3",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n     \"name\":\"mehedi\",\r\n    \"email\":\"driver2@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/auth/register",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "214343e2-ad56-4d25-97e4-529d7d24b546"
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.id) {",
+                  "    pm.collectionVariables.set(\"user_id\", jsonData.data.id);",
+                  "    pm.collectionVariables.set(\"admin_id\", jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "0bf57a67-69e9-49b3-9037-c6d96d661f50"
+              }
+            }
+          ],
+          "id": "4114d705-606e-41dd-ba65-54c7c61fc859",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"New Admin\",\r\n    \"email\": \"admin_new@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/users",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Driver",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.id) {",
+                  "    pm.collectionVariables.set(\"user_id\", jsonData.data.id);",
+                  "    pm.collectionVariables.set(\"driver_id\", jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "6054fb37-096d-485d-8673-c69dfb92f73e"
+              }
+            }
+          ],
+          "id": "8e400e5b-0a4d-4c74-b007-95f08709e191",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"New Driver\",\r\n    \"email\": \"driver_new@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"driver\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/users",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "id": "b23e2c3e-097b-467b-aef1-0611f27146e6",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/users",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User By ID",
+          "id": "5494715c-4f88-45a3-9968-e779b21b5540",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/users/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{user_id}}",
+                  "description": "UUID of the user"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Role",
+          "id": "c98f350e-8733-41a4-8ba9-503659a0f37f",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"role\":\"driver\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/users/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{user_id}}",
+                  "description": "UUID of the user"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "id": "8ddfad07-5f23-4923-9ecb-96591e0f25bf",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/users/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{user_id}}",
+                  "description": "UUID of the user to delete"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "3d12b571-c2f1-4ded-aeb8-3a1e624d6a1e"
+    },
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "Create Car",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.id) {",
+                  "    pm.collectionVariables.set(\"car_id\", jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "b007b9e1-20b9-45b8-9449-4fd4dd735bd9"
+              }
+            }
+          ],
+          "id": "eba80934-9139-42f7-8c48-d8d0a52ad61d",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Mercedes-Benz E-Class\",\r\n  \"brand\": \"Mercedes-Benz\",\r\n  \"model\": \"E-Class-2023\",\r\n  \"image\": \"https://stimg2.cardekho.com/images/roadTestimages/userimages/722/1620195837912/GeneralRoadTest.jpg?tr=w-360?tr=w-320\",\r\n  \"rating\": 4.9,\r\n  \"fuelType\": \"Diesel\",\r\n  \"passengerCapacity\": 5,\r\n  \"color\": \"Gray\",\r\n  \"condition\": \"New\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/cars",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "cars"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Cars",
+          "id": "80f24320-c347-4809-91c4-a9d6de6dbb80",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apollogears}}/cars",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "cars"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Car By ID",
+          "id": "96657feb-f9ce-4c5b-9a9f-88293cd8ee05",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apollogears}}/cars/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{car_id}}",
+                  "description": "UUID of the car"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Cars",
+          "id": "cd438bf3-9382-4f4b-8d7e-7bc8ac0e10fc",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apollogears}}/cars?searchTerm=Toyota&page=1&limit=10&sortBy=rating&sortOrder=desc",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "cars"
+              ],
+              "query": [
+                {
+                  "key": "searchTerm",
+                  "value": "Toyota",
+                  "description": "Search in name, brand, model"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "rating"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Car",
+          "id": "bb4bc576-2373-495e-bf43-ad176b91f048",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"rating\": 4.8,\r\n  \"color\": \"Black\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/cars/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{car_id}}",
+                  "description": "UUID of the car"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Car",
+          "id": "84d5749d-c44c-4e25-8dbd-830f9c0f1dd1",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/cars/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{car_id}}",
+                  "description": "UUID of the car to delete"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "99736504-15bb-42fa-bd4a-20b519dbe34a"
+    },
+    {
+      "name": "Rents",
+      "item": [
+        {
+          "name": "Rent Car",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.id) {",
+                  "    pm.collectionVariables.set(\"rent_id\", jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "3c138775-326b-49e9-bf76-460466bdac30"
+              }
+            }
+          ],
+          "id": "2338f4aa-b09c-40a5-a69e-e05ba8555423",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"{{user_id}}\",\r\n  \"carId\": \"{{car_id}}\",\r\n  \"startingPoint\": \"123 Main Street\",\r\n  \"destination\": \"456 Elm Street\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/rents",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "rents"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Rents",
+          "id": "5d199c93-dbc3-4bc5-8341-dc96b43c41ea",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/rents?userId={{user_id}}&rentStatus=pending",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "rents"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{user_id}}",
+                  "description": "UUID of the user"
+                },
+                {
+                  "key": "rentStatus",
+                  "value": "pending"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pending Rents",
+          "id": "4a08a02c-924a-49d5-b7b7-dc4bedad7ca3",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/rents?rentStatus=pending",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "rents"
+              ],
+              "query": [
+                {
+                  "key": "rentStatus",
+                  "value": "pending"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rent By ID",
+          "id": "68c6d6a5-c95b-4ebd-a822-b72681a23614",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/rents/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "rents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{rent_id}}",
+                  "description": "UUID of the rent"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Rent Status",
+          "id": "04f517ca-e5fe-4054-872c-365515e83524",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"rentStatus\": \"completed\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/rents/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "rents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{rent_id}}",
+                  "description": "UUID of the rent"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "4485db3c-2b3a-4ecc-aa4d-6394bc8daa63"
+    },
+    {
+      "name": "Bids",
+      "item": [
+        {
+          "name": "Create Bid",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.id) {",
+                  "    pm.collectionVariables.set(\"bid_id\", jsonData.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "ebc65d7c-f37d-416c-9938-693f853d8984"
+              }
+            }
+          ],
+          "id": "93e0a402-8fde-449d-a52a-8891d0236f66",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"rentId\": \"{{rent_id}}\",\r\n  \"driverId\": \"{{driver_id}}\",\r\n  \"bidAmount\": 200,\r\n  \"driverLocation\": \"789 Oak Street\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/bids",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "bids"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rent Bids",
+          "id": "1d14d008-cff7-423d-876d-ddc754bbdc32",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/bids?rentId={{rent_id}}",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "bids"
+              ],
+              "query": [
+                {
+                  "key": "rentId",
+                  "value": "{{rent_id}}",
+                  "description": "UUID of the rent"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Driver Bids",
+          "id": "ab980769-a434-4e23-a61f-9e3630818512",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/bids?driverId={{driver_id}}",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "bids"
+              ],
+              "query": [
+                {
+                  "key": "driverId",
+                  "value": "{{driver_id}}",
+                  "description": "UUID of the driver"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Bid (Edit)",
+          "id": "e8f08d62-d3e3-4d3b-8546-1723bef423a3",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bidAmount\": 180\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/bids/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "bids",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{bid_id}}",
+                  "description": "UUID of the bid"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Accept Bid",
+          "id": "fee117bb-2714-4dc8-944b-579cd7e17636",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"bidStatus\": \"accepted\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/bids/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "bids",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{bid_id}}",
+                  "description": "UUID of the bid to accept"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Bid",
+          "id": "90281901-47e7-44e6-9411-e507784cd06b",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{apollogears}}/bids/:id",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "bids",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "{{bid_id}}",
+                  "description": "UUID of the bid to delete"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "8decbf2c-fdf8-4245-8232-a09f2cd452c5"
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Create Payment Intent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.data && jsonData.data.transactionId) {",
+                  "    pm.collectionVariables.set(\"transaction_id\", jsonData.data.transactionId);",
+                  "}",
+                  "if (jsonData.data && jsonData.data.clientSecret) {",
+                  "    console.log(\"Client Secret:\", jsonData.data.clientSecret);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "d4f3281f-33ee-46bf-9983-d591b81dcbd3"
+              }
+            }
+          ],
+          "id": "73a53ad3-65eb-47b8-8184-db2d7bc90763",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"rentId\": \"{{rent_id}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/payments/create-payment-intent",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "payments",
+                "create-payment-intent"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Payment",
+          "id": "e023dfa9-d2be-435a-ba1a-2a062dda3f3b",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{access_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"rentId\": \"{{rent_id}}\",\r\n    \"transactionId\": \"{{transaction_id}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apollogears}}/payments/confirm",
+              "host": [
+                "{{apollogears}}"
+              ],
+              "path": [
+                "payments",
+                "confirm"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "51c6d1a3-4f93-4903-ae2e-10683e4946ce"
+    }
+  ],
+  "variable": [
+    {
+      "id": "1857480d-9623-408b-94d6-26f02a3b9700",
+      "key": "apollogears",
+      "value": "http://localhost:5000/api/v1",
+      "type": "string"
+    },
+    {
+      "id": "07919abf-fd30-444c-b334-9beded36d2e2",
+      "key": "access_token",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "JWT access token from login",
+        "type": "text/plain"
+      }
+    },
+    {
+      "id": "74a87a01-7ace-4612-9de4-9eb74bb1927f",
+      "key": "user_id",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "UUID of the current user",
+        "type": "text/plain"
+      }
+    },
+    {
+      "id": "ccb63542-40ad-41c7-92a7-8282e2d510cf",
+      "key": "car_id",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "UUID of a car",
+        "type": "text/plain"
+      }
+    },
+    {
+      "id": "b2da978c-1df1-44cd-b8e4-91a89fcf2f6a",
+      "key": "rent_id",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "UUID of a rent",
+        "type": "text/plain"
+      }
+    },
+    {
+      "id": "95432f7b-a913-4266-9ccc-53942b1146bd",
+      "key": "bid_id",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "UUID of a bid",
+        "type": "text/plain"
+      }
+    },
+    {
+      "id": "f93e4553-dc3a-4c00-b695-6b019d9a8b19",
+      "key": "driver_id",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "UUID of a driver",
+        "type": "text/plain"
+      }
+    },
+    {
+      "id": "c5f67b42-cf65-4b54-8d84-1845fc2b7c54",
+      "key": "admin_id",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "UUID of an admin",
+        "type": "text/plain"
+      }
+    },
+    {
+      "id": "07df79df-8233-4f18-a6c6-e17f306744cb",
+      "key": "transaction_id",
+      "value": "",
+      "type": "string",
+      "description": {
+        "content": "Transaction ID from stripe",
+        "type": "text/plain"
+      }
+    }
+  ]
+}

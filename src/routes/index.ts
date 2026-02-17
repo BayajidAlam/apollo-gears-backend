@@ -4,6 +4,7 @@ import { BidRoutes } from '../modules/Bid/bid.route';
 import { CarRoutes } from '../modules/Car/car.route';
 import { RentRoutes } from '../modules/Rent/rent.route';
 import { UserRoutes } from '../modules/User/user.route';
+import { PaymentRoutes } from '../modules/Payment/payment.route';
 
 type TModuleRoutes = {
   path: string;
@@ -32,6 +33,10 @@ const moduleRoutes: TModuleRoutes[] = [
   {
     path: '/rents',
     route: RentRoutes,
+  },
+  {
+    path: '/payments',
+    route: PaymentRoutes,
   },
 ];
 

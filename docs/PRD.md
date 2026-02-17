@@ -44,78 +44,117 @@
 
 ---
 
-## 2. Database Schema (Prisma/PostgreSQL)
+# 2 📘 Product Data Model (PRD Style)
 
-```prisma
-// Enums
-enum UserRole { admin, user, driver }
-enum FuelType { Octane, Hybrid, Electric, Diesel, Petrol }
-enum CarCondition { New, Used }
-enum RentStatus { pending, ongoing, completed }
-enum BidStatus { accepted, pending, rejected }
+## 1️⃣ User
 
-// Models
-model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String?
-  role      UserRole @default(user)
-  img       String?
-  rating    Float    @default(0)
-  rents     Rent[]
-  bids      Bid[]    @relation("DriverBids")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  @@map("users")
-}
+**Description**  
+A user represents any person using the platform. A user can be an **Admin**, **Regular User**, or **Driver**.
 
-model Car {
-  id                String       @id @default(uuid())
-  name              String
-  brand             String
-  model             String
-  image             String
-  rating            Float        @default(0)
-  fuelType          FuelType
-  passengerCapacity Int
-  color             String
-  condition         CarCondition
-  rents             Rent[]
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
-  @@map("cars")
-}
+**Attributes**
+- ID (unique identifier)
+- Name
+- Email (unique)
+- Password (optional – supports social login)
+- Role (Admin / User / Driver)
+- Profile image (optional)
+- Rating (average rating, default 0)
+- Created date
+- Last updated date
 
-model Rent {
-  id            String     @id @default(uuid())
-  rentStatus    RentStatus @default(pending)
-  startingPoint String
-  destination   String
-  userId        String
-  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  carId         String
-  car           Car        @relation(fields: [carId], references: [id], onDelete: Cascade)
-  bids          Bid[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  @@map("rents")
-}
+**Relationships**
+- A user can create **multiple rent requests**
+- A user (if role = Driver) can place **multiple bids** on rent requests
 
-model Bid {
-  id             String    @id @default(uuid())
-  bidAmount      Float
-  bidStatus      BidStatus @default(pending)
-  driverLocation String
-  rentId         String
-  rent           Rent      @relation(fields: [rentId], references: [id], onDelete: Cascade)
-  driverId       String
-  driver         User      @relation("DriverBids", fields: [driverId], references: [id], onDelete: Cascade)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  @@map("bids")
-}
-```
+---
+
+## 2️⃣ Car
+
+**Description**  
+A car represents a vehicle available for rent on the platform.
+
+**Attributes**
+- ID (unique identifier)
+- Car name
+- Brand
+- Model
+- Image
+- Rating (average rating, default 0)
+- Fuel type (Octane, Hybrid, Electric, Diesel, Petrol)
+- Passenger capacity
+- Color
+- Condition (New / Used)
+- Created date
+- Last updated date
+
+**Relationships**
+- A car can be associated with **multiple rent requests**
+- Each rent request uses **one specific car**
+
+---
+
+## 3️⃣ Rent
+
+**Description**  
+A rent represents a ride or car rental request created by a user.
+
+**Attributes**
+- ID (unique identifier)
+- Rent status (Pending, Ongoing, Completed)
+- Starting point
+- Destination
+- Created date
+- Last updated date
+
+**Relationships**
+- A rent belongs to **one user** (who requested the ride)
+- A rent is associated with **one car**
+- A rent can receive **multiple bids** from drivers
+
+---
+
+## 4️⃣ Bid
+
+**Description**  
+A bid represents an offer made by a driver for a specific rent request.
+
+**Attributes**
+- ID (unique identifier)
+- Bid amount
+- Bid status (Pending, Accepted, Rejected)
+- Driver’s current location
+- Created date
+- Last updated date
+
+**Relationships**
+- A bid belongs to **one rent request**
+- A bid is created by **one driver (user with role = Driver)**
+
+---
+
+## 🔗 Relationship Summary
+
+- One **User** → can create many **Rents**
+- One **User (Driver)** → can create many **Bids**
+- One **Car** → can be used in many **Rents**
+- One **Rent** → belongs to one **User**
+- One **Rent** → uses one **Car**
+- One **Rent** → can have many **Bids**
+- One **Bid** → belongs to one **Rent**
+- One **Bid** → belongs to one **Driver**
+
+---
+
+## 🧠 Business Rules
+
+- Only users with role **Driver** can place bids
+- Only **one bid** can be accepted per rent
+- When a bid is accepted:
+  - Rent status becomes **Ongoing**
+- When the trip is finished:
+  - Rent status becomes **Completed**
+- Ratings are updated after rent completion
+
 
 ---
 
@@ -131,6 +170,7 @@ model Bid {
 ### Users
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
+| POST | `/api/v1/users` | Create Admin, Driver | Admin |
 | GET | `/api/v1/users` | Get all users | Admin |
 | GET | `/api/v1/users/:id` | Get user by ID | Admin |
 | PATCH | `/api/v1/users/:id` | Update user | Admin |

@@ -99,6 +99,7 @@ model Rent {
   car   Car    @relation(fields: [carId], references: [id], onDelete: Cascade)
 
   bids Bid[]
+  payment Payment?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -124,4 +125,21 @@ model Bid {
   updatedAt DateTime @updatedAt
 
   @@map("bids")
+}
+
+/// Payment model - represents a payment transaction
+model Payment {
+  id                String   @id @default(uuid())
+  transactionId     String   @unique
+  amount            Float
+  status            String   @default("Pending")
+  paymentGatewayData Json?
+
+  rentId String @unique
+  rent   Rent   @relation(fields: [rentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("payments")
 }
